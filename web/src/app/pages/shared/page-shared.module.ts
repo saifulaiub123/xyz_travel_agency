@@ -6,15 +6,15 @@ import { BodyComponent } from './body/body.component';
 
 @NgModule({
   declarations: [
-    FooterComponent,
-    HeaderComponent,
-    BodyComponent
+    // FooterComponent,
+    // HeaderComponent,
+    // BodyComponent
   ],
   exports:
   [
-    FooterComponent,
-    HeaderComponent,
-    BodyComponent
+    // FooterComponent,
+    // HeaderComponent,
+    // BodyComponent
   ],
   imports: [
     CommonModule,
