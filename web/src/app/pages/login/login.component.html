@@ -28,16 +28,21 @@
     <div></div>
     <form [formGroup]="registrationForm">
       <input type="name" formControlName="name" placeholder="Enter your name">
-      <span *ngIf="isRequiredReg('name') && regSubmitted">
-        <span *ngIf=" this.formControls['name'].errors" style="color: red; font-size: 11px;">Name is required.</span>
-      </span>
+      <span *ngIf=" this.formControlsReg['name'].errors && regSubmitted" style="color: red; font-size: 11px;">Name is required.</span>
+
       <input type="email" formControlName="email" placeholder="Enter your email">
-      <span *ngIf="isRequiredReg('email') && regSubmitted">
-        <span *ngIf=" this.formControls['email'].errors" style="color: red; font-size: 11px;">Username is required.</span>
-      </span>
+      <span *ngIf=" this.formControlsReg['email'].errors && regSubmitted" style="color: red; font-size: 11px;">Email is required.</span>
+
       <input type="password" formControlName="password" placeholder="Create a password">
+      <span *ngIf=" this.formControlsReg['password'].errors && regSubmitted" style="color: red; font-size: 11px;">Password is required.</span>
+
       <input type="password" formControlName="reEnterPassword" placeholder="Confirm your password">
+      <span *ngIf="this.formControlsReg['reEnterPassword'].errors && regSubmitted" style="color: red; font-size: 11px;">Confirm password is required.</span>
+      <span *ngIf="!this.formControlsReg['reEnterPassword'].errors && passwordNotMatched" style="color: red; font-size: 11px;">Password not matched</span>
+
       <input type="text" formControlName="phoneNumber" placeholder="Enter your phone number">
+      <span *ngIf=" this.formControlsReg['phoneNumber'].errors && regSubmitted" style="color: red; font-size: 11px;">Phonenumber is required.</span>
+
       <input type="button" class="button" value="Signup" (click)="registration()">
     </form>
     <div class="signup">

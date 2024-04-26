@@ -41,7 +41,7 @@ export class SuggessionComponent implements OnInit {
       tripDestination: new FormControl('', [Validators.required]),
       placeToVisit: new FormControl('', [Validators.required]),
       accomodationSuggession: new FormControl('', []),
-      travelType: new FormControl('', [Validators.required]),
+      travelType: new FormControl('Train', [Validators.required]),
       dining: new FormControl('', []),
       averageMoneySpent: new FormControl('', [Validators.required]),
       comments: new FormControl('', []),

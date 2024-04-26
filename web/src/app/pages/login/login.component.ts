@@ -32,6 +32,7 @@ export class LoginComponent implements OnInit {
   registrationError: boolean = false;
   submitted: boolean = false;
   regSubmitted: boolean = false;
+  passwordNotMatched: boolean = false;
   constructor(
     private fb: FormBuilder,
     private _accountService: AccountService,
@@ -96,8 +97,10 @@ export class LoginComponent implements OnInit {
   registration()
   {
     this.regSubmitted = true;
-    if(this.registrationForm.controls['password'].value !== this.registrationForm.controls['reEnterPassword'].value)
+    this.passwordNotMatched = false;
+    if((this.registrationForm.controls['password'].value !== '' || this.registrationForm.controls['reEnterPassword'].value !== '') && this.registrationForm.controls['password'].value !== this.registrationForm.controls['reEnterPassword'].value)
     {
+      this.passwordNotMatched = true;
       return;
     }
     if(!this.registrationForm.valid)
