@@ -23,16 +23,16 @@ body{
   box-shadow: 0 5px 10px rgba(0,0,0,0.3);
 }
 .container .registration{
-  display: none;
+  /* display: none; */
 }
 #check:checked ~ .registration{
-  display: block;
+  /* display: block; */
 }
 #check:checked ~ .login{
-  display: none;
+  /* display: none; */
 }
 #check{
-  display: none;
+  /* display: none; */
 }
 .container .form{
   padding: 2rem;

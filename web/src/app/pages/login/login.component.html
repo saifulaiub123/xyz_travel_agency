@@ -1,31 +1,37 @@
 <!-- <app-header></app-header> -->
 <div class="container">
 
-  <div class="login form">
-    <header>Login</header>
-    <form action="#">
-      <input type="text" placeholder="Enter your email">
-      <input type="password" placeholder="Enter your password">
-      <a href="#">Forgot password?</a>
-      <input type="button" class="button" value="Login">
+  <div class="login form" *ngIf="showLoginForm">
+    <header>Login></header>
+    <form [formGroup]="loginForm">
+      <input type="email" formControlName="username" placeholder="Enter your email">
+      <div *ngIf="isRequired('username')">
+        <div *ngIf=" this.formControls['username'].errors" style="color: red;">Username is required.</div>
+      </div>
+      <input type="password" formControlName="password" placeholder="Enter your password">
+      <div *ngIf="isRequired('password')">
+        <div *ngIf=" this.formControls['password'].errors" style="color: red;">Password is required.</div>
+      </div>
+      <input type="button" class="button" value="Login" (click)="login()">
     </form>
     <div class="signup">
       <span class="signup">Don't have an account?
-       <label for="check">Signup</label>
+       <label for="check" (click)="showLoginForm = !showLoginForm">Signup</label>
       </span>
     </div>
   </div>
-  <div class="registration form">
+  <div class="registration form" *ngIf="!showLoginForm">
     <header>Signup</header>
-    <form action="#">
-      <input type="text" placeholder="Enter your email">
-      <input type="password" placeholder="Create a password">
-      <input type="password" placeholder="Confirm your password">
-      <input type="button" class="button" value="Signup">
+    <form [formGroup]="registrationForm">
+      <input type="email" formControlName="email" placeholder="Enter your email">
+      <input type="password" formControlName="password" placeholder="Create a password">
+      <input type="password" formControlName="reEnterPassword" placeholder="Confirm your password">
+      <input type="text" formControlName="phoneNumber" placeholder="Enter your phone number">
+      <input type="button" class="button" value="Signup" (click)="registration()">
     </form>
     <div class="signup">
       <span class="signup">Already have an account?
-       <label for="check">Login</label>
+       <label for="check" (click)="showLoginForm = !showLoginForm">Login</label>
       </span>
     </div>
   </div>
