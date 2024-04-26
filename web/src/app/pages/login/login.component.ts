@@ -13,7 +13,14 @@ import { Router } from '@angular/router';
     standalone: true,
     templateUrl: './login.component.html',
     styleUrl: './login.component.css',
-    imports: [CommonModule, HeaderComponent, FooterComponent, ReactiveFormsModule, FormsModule, HttpClientModule ]
+    imports: [
+      CommonModule,
+      HeaderComponent,
+      FooterComponent,
+      ReactiveFormsModule,
+      FormsModule,
+      HttpClientModule
+    ]
 })
 
 export class LoginComponent implements OnInit {
@@ -43,6 +50,7 @@ export class LoginComponent implements OnInit {
       email: new FormControl('', [Validators.required]),
       password: new FormControl('', [Validators.required]),
     })
+
     this.registrationForm =  this.fb.group({
       name: new FormControl('', [Validators.required]),
       email: new FormControl('', [Validators.required]),
@@ -83,10 +91,6 @@ export class LoginComponent implements OnInit {
     {
       return
     }
-    this._accountService.registration(this.registrationForm.value).subscribe((res: any) =>
-    {
-
-    })
     this._accountService.registration(this.registrationForm.value).pipe(
       catchError((err: any) => {
         this.registrationError = true;

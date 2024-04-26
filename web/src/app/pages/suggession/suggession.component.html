@@ -19,18 +19,18 @@
   <div class="container">
     <div class="row">
       <div class="col-lg-12 mb-5 mb-lg-0">
-        <form class="contact-form">
+        <form class="contact-form" [formGroup]="suggessionForm">
           <div class="row">
             <div class="col-6">
               <div class="form-group">
                 <label class="text-black" for="fname">Trip Destination</label>
-                <input type="text" class="form-control" id="fname">
+                <input type="text" class="form-control" id="fname" formControlName="tripDestination">
               </div>
             </div>
             <div class="col-6">
               <div class="form-group">
                 <label class="text-black" for="lname">Place to Visit</label>
-                <input type="text" class="form-control" id="lname">
+                <input type="text" class="form-control" id="lname" formControlName="placeToVisit">
               </div>
             </div>
           </div>
@@ -38,13 +38,13 @@
             <div class="col-6">
               <div class="form-group">
                 <label class="text-black" for="fname">Accomodation Suggession</label>
-                <input type="text" class="form-control" id="fname">
+                <input type="text" class="form-control" id="fname" formControlName="accomodationSuggession">
               </div>
             </div>
             <div class="col-6">
               <div class="form-group">
                 <label class="text-black" for="lname">Travel Type</label>
-                <select name="" id="" class="form-control custom-select">
+                <select name="" id="" class="form-control custom-select" formControlName="travelType">
                   <option value="Train">Train</option>
                   <option value="Plane">Plane</option>
                   <option value="Car">Car</option>
@@ -57,22 +57,22 @@
             <div class="col-6">
               <div class="form-group">
                 <label class="text-black" for="fname">Dining(Place to eat)</label>
-                <input type="text" class="form-control" id="fname">
+                <input type="text" class="form-control" id="fname" formControlName="dining">
               </div>
             </div>
             <div class="col-6">
               <div class="form-group">
                 <label class="text-black" for="lname">Average money(£) spent during trip</label>
-                <input type="number" class="form-control" id="lname">
+                <input type="number" class="form-control" id="lname" formControlName="averageMoneySpent">
               </div>
             </div>
           </div>
           <div class="form-group">
             <label class="text-black" for="message">Comments</label>
-            <textarea name="" class="form-control" id="message" cols="30" rows="5"></textarea>
+            <textarea name="" class="form-control" id="message" cols="30" rows="5" formControlName="comments"></textarea>
           </div>
 
-          <button type="submit" class="btn btn-primary">Submit</button>
+          <button type="submit" class="btn btn-primary" (click)="submit()">Submit</button>
         </form>
       </div>
       <!-- <div class="col-lg-5 ml-auto">
