@@ -10,6 +10,7 @@ namespace TA.Infrastructure.Dependency
         {
  
             services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<ISuggessionRepository, SuggessionRepository>();
             return services;
         }
     }

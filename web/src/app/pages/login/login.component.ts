@@ -30,7 +30,8 @@ export class LoginComponent implements OnInit {
   showLoginForm!: boolean;
   loginFailed: boolean = false;
   registrationError: boolean = false;
-
+  submitted: boolean = false;
+  regSubmitted: boolean = false;
   constructor(
     private fb: FormBuilder,
     private _accountService: AccountService,
@@ -44,6 +45,10 @@ export class LoginComponent implements OnInit {
   get formControls()  {
     return this.loginForm.controls;
   }
+  get formControlsReg()  {
+    return this.registrationForm.controls;
+  }
+
   initForm()
   {
     this.loginForm =  this.fb.group({
@@ -60,11 +65,16 @@ export class LoginComponent implements OnInit {
     })
   }
   isRequired(field: string){
-    return this.formControls[field].invalid && (this.formControls[field].dirty || this.formControls[field].touched)
+    let r =  this.formControls[field].invalid && (this.formControls[field].dirty || this.formControls[field].touched)
+    return r;
   }
-
+  isRequiredReg(field: string){
+    let r =  this.formControlsReg[field].invalid && (this.formControlsReg[field].dirty || this.formControlsReg[field].touched)
+    return r;
+  }
   login()
   {
+    this.submitted = true;
     if(!this.loginForm.valid)
     {
       return
@@ -72,10 +82,12 @@ export class LoginComponent implements OnInit {
     this._accountService.login(this.loginForm.value).pipe(
       catchError((err: any) => {
         this.loginFailed = true;
+        this.submitted = false;
         return ''
       }
     )).subscribe((res: any)=> {
       this.loginFailed = false;
+      this.submitted = false;
       localStorage.setItem("userData", JSON.stringify(res));
       this.router.navigateByUrl('/user/dashboard');
     })
@@ -83,6 +95,7 @@ export class LoginComponent implements OnInit {
 
   registration()
   {
+    this.regSubmitted = true;
     if(this.registrationForm.controls['password'].value !== this.registrationForm.controls['reEnterPassword'].value)
     {
       return;
@@ -94,12 +107,16 @@ export class LoginComponent implements OnInit {
     this._accountService.registration(this.registrationForm.value).pipe(
       catchError((err: any) => {
         this.registrationError = true;
+        this.regSubmitted = false;
+
         return '';
       }
     )).subscribe((data: any)=> {
       this.registrationError = false;
       this.registrationForm.reset();
       this.showLoginForm = true;
+      this.regSubmitted = false;
+
     })
   }
 }

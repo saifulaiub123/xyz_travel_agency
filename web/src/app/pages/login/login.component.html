@@ -7,13 +7,13 @@
     <div></div>
     <form [formGroup]="loginForm">
       <input type="email" formControlName="email" placeholder="Enter your email">
-      <div *ngIf="isRequired('email')">
-        <div *ngIf=" this.formControls['email'].errors" style="color: red;">Username is required.</div>
-      </div>
+      <span *ngIf="isRequired('email') && submitted">
+        <span *ngIf=" this.formControls['email'].errors" style="color: red; font-size: 11px;">Username is required.</span>
+      </span>
       <input type="password" formControlName="password" placeholder="Enter your password">
-      <div *ngIf="isRequired('password')">
-        <div *ngIf=" this.formControls['password'].errors" style="color: red;">Password is required.</div>
-      </div>
+      <span *ngIf="isRequired('password') && submitted">
+        <span *ngIf=" this.formControls['password'].errors" style="color: red; font-size: 11px;">Password is required.</span>
+      </span>
       <input type="button" class="button" value="Login" (click)="login()">
     </form>
     <div class="signup">
@@ -28,7 +28,13 @@
     <div></div>
     <form [formGroup]="registrationForm">
       <input type="name" formControlName="name" placeholder="Enter your name">
+      <span *ngIf="isRequiredReg('name') && regSubmitted">
+        <span *ngIf=" this.formControls['name'].errors" style="color: red; font-size: 11px;">Name is required.</span>
+      </span>
       <input type="email" formControlName="email" placeholder="Enter your email">
+      <span *ngIf="isRequiredReg('email') && regSubmitted">
+        <span *ngIf=" this.formControls['email'].errors" style="color: red; font-size: 11px;">Username is required.</span>
+      </span>
       <input type="password" formControlName="password" placeholder="Create a password">
       <input type="password" formControlName="reEnterPassword" placeholder="Confirm your password">
       <input type="text" formControlName="phoneNumber" placeholder="Enter your phone number">

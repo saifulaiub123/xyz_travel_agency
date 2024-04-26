@@ -25,6 +25,6 @@ export class AccountService {
   }
   submitSuggession(model: any): Observable<any>
   {
-    return this.http.post(`${this.url}/Account/submitSuggession`,model,{ headers : this.headers });
+    return this.http.post(`${this.url}/Suggession/SubmitSuggession`,model,{ headers : this.headers });
   }
 }

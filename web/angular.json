@@ -25,8 +25,9 @@
               "src/assets"
             ],
             "styles": [
+              "node_modules/bootstrap/dist/css/bootstrap.min.css",
               "src/styles.css"
-            ],
+            ],@import "bootstrap/scss/bootstrap";
             "scripts": [
               "src/assets/js/jquery-3.4.1.min.js",
               "src/assets/js/popper.min.js",

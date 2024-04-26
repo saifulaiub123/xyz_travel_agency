@@ -6,7 +6,7 @@ import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, 
 import { HttpClientModule } from '@angular/common/http';
 import { AccountService } from '../../core/services/account.service';
 import { catchError } from 'rxjs';
-
+import { NgbAlert, NgbAlertModule } from '@ng-bootstrap/ng-bootstrap';
 @Component({
     selector: 'app-suggession',
     standalone: true,
@@ -18,12 +18,14 @@ import { catchError } from 'rxjs';
       HeaderComponent,
       ReactiveFormsModule,
       FormsModule,
-      HttpClientModule
+      HttpClientModule,
+      NgbAlert
     ]
 })
 export class SuggessionComponent implements OnInit {
   suggessionForm!: FormGroup;
   suggessionFormError: boolean = false;
+  showSuccessMessage: boolean = false;
   constructor(
     private _accountService: AccountService,
     private fb: FormBuilder,
@@ -55,12 +57,16 @@ export class SuggessionComponent implements OnInit {
       this._accountService.submitSuggession(this.suggessionForm.value).pipe(
         catchError((err: any) => {
           this.suggessionFormError = true;
-          return '';
+          this.showSuccessMessage = false;
+        return '';
         }
       )).subscribe((data: any)=> {
         this.suggessionForm.reset();
         this.suggessionFormError = false;
-
+        this.showSuccessMessage = true;
       })
   }
+  close() {
+    this.showSuccessMessage = false;
+	}
 }

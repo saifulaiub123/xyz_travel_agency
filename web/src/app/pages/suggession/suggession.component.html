@@ -71,30 +71,16 @@
             <label class="text-black" for="message">Comments</label>
             <textarea name="" class="form-control" id="message" cols="30" rows="5" formControlName="comments"></textarea>
           </div>
-
           <button type="submit" class="btn btn-primary" (click)="submit()">Submit</button>
+
+          <div *ngIf="showSuccessMessage" style="text-align: center;">
+            <span style="color: darkgreen;font-weight: bold;">Suggession submitted successfully</span>
+          </div>
+          <div *ngIf="suggessionFormError" style="text-align: center;">
+            <span style="color: red;font-weight: bold;">Something went wrong</span>
+          </div>
         </form>
       </div>
-      <!-- <div class="col-lg-5 ml-auto">
-        <div class="quick-contact-item d-flex align-items-center mb-4">
-          <span class="flaticon-house"></span>
-          <address class="text">
-            155 Market St #101, Paterson, NJ 07505, United States
-          </address>
-        </div>
-        <div class="quick-contact-item d-flex align-items-center mb-4">
-          <span class="flaticon-phone-call"></span>
-          <address class="text">
-            +1 202 2020 200
-          </address>
-        </div>
-        <div class="quick-contact-item d-flex align-items-center mb-4">
-          <span class="flaticon-mail"></span>
-          <address class="text">
-            infomydomain.com
-          </address>
-        </div>
-      </div> -->
     </div>
   </div>
 </div>
