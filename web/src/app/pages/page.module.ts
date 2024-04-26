@@ -9,7 +9,7 @@ import { FooterComponent } from "./shared/footer/footer.component";
 @NgModule({
     declarations: [
         // HomeComponent,
-        ElementsComponent
+        // ElementsComponent
     ],
     exports: [
     // HomeComponent

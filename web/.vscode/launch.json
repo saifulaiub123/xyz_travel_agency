@@ -3,10 +3,10 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "name": "Attach to Chrome",
-      "port": 4200,
-      "request": "attach",
+      "name": "Launch Chrome",
+      "request": "launch",
       "type": "chrome",
+      "url": "http://localhost:4200",
       "webRoot": "${workspaceFolder}"
     }
   ]

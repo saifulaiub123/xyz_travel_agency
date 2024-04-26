@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { HeaderComponent } from '../shared/header/header.component';
 import { FooterComponent } from '../shared/footer/footer.component';
 
@@ -9,6 +9,8 @@ import { FooterComponent } from '../shared/footer/footer.component';
   styleUrl: './elements.component.css',
   imports: [HeaderComponent, FooterComponent]
 })
-export class ElementsComponent {
-
+export class ElementsComponent implements OnInit{
+  ngOnInit(): void {
+    //throw new Error('Method not implemented.');
+  }
 }
