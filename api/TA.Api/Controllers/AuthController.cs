@@ -1,66 +1,68 @@
-﻿using TA.Application.Enum;
-using TA.Application.IService;
-using TA.Application.Response;
+﻿using TA.Application.Response;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using TA.Api.Authentication;
 using TA.Domain.DBModel;
 using TA.Domain.Model;
-using AutoMapper;
-using System.Linq;
 
 namespace TA.Api.Controllers
 {
     public class AuthController : BaseController
     {
-
         private readonly TokenHelper _jwtExt;
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
-        private readonly RoleManager<Domain.DBModel.Role> _roleManager;
-        private readonly IOtpService _otpService;
-        private readonly IConfiguration _configuration;
-        private readonly IMapper _mapper;
-
 
         public AuthController(
             TokenHelper jwtExt,
             UserManager<ApplicationUser> userManager,
-            SignInManager<ApplicationUser> signInManager,
-            RoleManager<Domain.DBModel.Role> roleManager, 
-            IOtpService otpService,
-            IConfiguration configuration,
-            IMapper mapper)
+            SignInManager<ApplicationUser> signInManager
+            )
         {
             _jwtExt = jwtExt;
             _userManager = userManager;
             _signInManager = signInManager;
-            _roleManager = roleManager;
-            _otpService = otpService;
-            _configuration = configuration;
-            _mapper = mapper;
         }
 
         [HttpPost]
-        [Route("Register")]
+        [Route("Registration")]
         public async Task<IActionResult> Register(RegisterModel registerModel)
         {
-            var user = new ApplicationUser()
+            var userModel = new ApplicationUser()
             {
                 Name = registerModel.Name,
-                SurName = registerModel.SurName,
+                SurName = registerModel.Name,
                 Email = registerModel.Email,
                 UserName = registerModel.Email,
                 PasswordHash = registerModel.Password,
                 Status = 1
             };
-            var result = await _userManager.CreateAsync(user, registerModel.Password);
-            if (!result.Succeeded)
+            var user = await _userManager.FindByNameAsync(registerModel.Email);
+
+            if (user != null)
             {
-                var errors = result.Errors.Select(x => x.Description).ToList();
-                return BadRequest(new AuthResponse(){ Errors = errors });
+                await _userManager.AddToRoleAsync(user, Application.Enum.Role.User.ToString());
             }
-            await _userManager.AddToRoleAsync(user, Application.Enum.Role.User.ToString());
+            else
+            {
+                try
+                {
+                    var result = await _userManager.CreateAsync(userModel, registerModel.Password);
+                    if (!result.Succeeded)
+                    {
+                        var errors = result.Errors.Select(x => x.Description).ToList();
+                        return BadRequest(new AuthResponse() { Errors = errors });
+                    }
+                    //await _userManager.AddToRoleAsync(userModel, Application.Enum.Role.User.ToString());
+                }
+                catch (Exception ex)
+                {
+                    //var insertedUser = _userManager.Users.FirstOrDefault(x => x.Email == registerModel.Email);
+                    var insertedUser = await _userManager.FindByNameAsync(registerModel.Email);
+                    await _userManager.DeleteAsync(user);
+                    throw;
+                }
+            }
             return Ok();
         }
 
@@ -90,6 +92,5 @@ namespace TA.Api.Controllers
                 Role = string.Join(",",userRoles.ToList())
             });
         }
-
     }
 }

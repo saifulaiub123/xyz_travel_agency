@@ -7,6 +7,7 @@ import { ContactComponent } from './pages/contact/contact.component';
 import { LoginComponent } from './pages/login/login.component';
 import { RegistrationComponent } from './pages/registration/registration.component';
 import { SuggessionComponent } from './pages/suggession/suggession.component';
+import { DashboardComponent } from './features/dashboard/dashboard.component';
 
 export const routes: Routes = [
 
@@ -33,6 +34,9 @@ export const routes: Routes = [
   },
   {
     path: 'suggession',component: SuggessionComponent,
+  },
+  {
+    path: 'user/dashboard',component: DashboardComponent,
   },
   { path: '**', redirectTo: 'error/404' },
 ];

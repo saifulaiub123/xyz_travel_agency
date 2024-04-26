@@ -74,26 +74,6 @@ namespace TA.Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Otps",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    MobileNumber = table.Column<string>(type: "nvarchar(15)", maxLength: 15, nullable: false),
-                    VerificationCode = table.Column<string>(type: "nvarchar(6)", maxLength: 6, nullable: false),
-                    ExpiredAt = table.Column<DateTime>(type: "datetime", maxLength: 250, nullable: false),
-                    IsVerified = table.Column<bool>(type: "bit", nullable: false),
-                    DateCreated = table.Column<DateTime>(type: "datetime", nullable: false),
-                    CreatedBy = table.Column<int>(type: "int", nullable: false),
-                    LastUpdated = table.Column<DateTime>(type: "datetime", nullable: true),
-                    UpdatedBy = table.Column<int>(type: "int", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Otps", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "AspNetRoleClaims",
                 columns: table => new
                 {
@@ -258,11 +238,6 @@ namespace TA.Infrastructure.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Otps_MobileNumber",
-                table: "Otps",
-                column: "MobileNumber");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_UserStatus_UserId",
                 table: "UserStatus",
                 column: "UserId");
@@ -288,9 +263,6 @@ namespace TA.Infrastructure.Migrations
 
             migrationBuilder.DropTable(
                 name: "AspNetUserTokens");
-
-            migrationBuilder.DropTable(
-                name: "Otps");
 
             migrationBuilder.DropTable(
                 name: "UserStatus");

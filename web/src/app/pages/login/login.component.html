@@ -3,10 +3,12 @@
 
   <div class="login form" *ngIf="showLoginForm">
     <header>Login></header>
+    <div *ngIf="loginFailed" style="color: red;text-align: center;">Invalid username or password</div>
+    <div></div>
     <form [formGroup]="loginForm">
-      <input type="email" formControlName="username" placeholder="Enter your email">
-      <div *ngIf="isRequired('username')">
-        <div *ngIf=" this.formControls['username'].errors" style="color: red;">Username is required.</div>
+      <input type="email" formControlName="email" placeholder="Enter your email">
+      <div *ngIf="isRequired('email')">
+        <div *ngIf=" this.formControls['email'].errors" style="color: red;">Username is required.</div>
       </div>
       <input type="password" formControlName="password" placeholder="Enter your password">
       <div *ngIf="isRequired('password')">
@@ -22,7 +24,10 @@
   </div>
   <div class="registration form" *ngIf="!showLoginForm">
     <header>Signup</header>
+    <div *ngIf="registrationError" style="color: red;text-align: center;">Something went wrong</div>
+    <div></div>
     <form [formGroup]="registrationForm">
+      <input type="name" formControlName="name" placeholder="Enter your name">
       <input type="email" formControlName="email" placeholder="Enter your email">
       <input type="password" formControlName="password" placeholder="Create a password">
       <input type="password" formControlName="reEnterPassword" placeholder="Confirm your password">

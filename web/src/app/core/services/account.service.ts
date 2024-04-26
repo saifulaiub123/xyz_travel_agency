@@ -17,11 +17,11 @@ export class AccountService {
 
   login(model: any): Observable<any>
   {
-    return this.http.post(`${this.url}/Account/Login`,model,{ headers : this.headers });
+    return this.http.post(`${this.url}/Auth/Login`,model,{ headers : this.headers });
   }
   registration(model: any): Observable<any>
   {
-    return this.http.post(`${this.url}/Account/registration`,model,{ headers : this.headers });
+    return this.http.post(`${this.url}/Auth/registration`,model,{ headers : this.headers });
   }
   submitSuggession(model: any): Observable<any>
   {
